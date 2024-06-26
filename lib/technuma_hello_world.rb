@@ -4,5 +4,7 @@ require_relative "technuma_hello_world/version"
 
 module TechnumaHelloWorld
   class Error < StandardError; end
-  # Your code goes here...
+  def self.hello
+    "Hello World"
+  end
 end
