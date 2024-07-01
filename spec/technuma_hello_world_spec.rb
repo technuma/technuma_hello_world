@@ -19,7 +19,6 @@ RSpec.describe TechnumaHelloWorld do
       end
     end
     class Post < ActiveRecord::Base
-      include TechnumaHelloWorld
       has_many :comments
     end
 

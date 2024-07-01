@@ -7,8 +7,7 @@ require "logger"
 
 module TechnumaHelloWorld
   class Error < StandardError; end
-  extend ActiveSupport::Concern
-  included do
+  ActiveSupport.on_load(:active_record) do
     ActiveRecord::PredicateBuilder.prepend(Module.new do
       def [](attr_name, value, operator = nil)
         if !operator && attr_name.end_with?(">", ">=", "<", "<=")
