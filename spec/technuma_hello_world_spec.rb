@@ -60,6 +60,7 @@ RSpec.describe TechnumaHelloWorld do
     end
   end
 
+  # https://github.com/rails/rails/pull/39863/files#diff-12d007e9c2419aa48cfd2003590590870871d40704fe22cb85a2bf9d56e0b307R95-R100
   describe "time precision" do
     before do
       ActiveRecord::Schema.define do
