@@ -59,4 +59,27 @@ RSpec.describe TechnumaHelloWorld do
       end
     end
   end
+
+  describe "time precision" do
+    before do
+      ActiveRecord::Schema.define do
+        create_table :foos, force: true do |t|
+          t.time :start, precision: 0
+          t.time :finish, precision: 4
+        end
+      end
+      class Foo < ActiveRecord::Base; end
+    end
+
+    let(:time) { Time.utc(2000, 1, 1, 12, 30, 0, 999_999) }
+    let!(:foo) { Foo.create!(start: time, finish: time) }
+
+    it "handles time precision correctly" do
+      expect(Foo.find_by("start >= ?", time)).to be_nil
+      expect(Foo.where("finish >= ?", time).count).to eq(0)
+
+      expect(Foo.find_by("start >=": time)).to be_truthy
+      expect(Foo.where("finish >=": time).count).to eq(1)
+    end
+  end
 end
