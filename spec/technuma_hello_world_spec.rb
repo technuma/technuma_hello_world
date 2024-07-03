@@ -25,6 +25,21 @@ RSpec.describe TechnumaHelloWorld do
   it "has a version number" do
     expect(TechnumaHelloWorld::VERSION).not_to be nil
   end
+  describe "exists with large number" do
+    let!(:post) { Post.create! }
+    it "checks post existence with large number conditions" do
+      Post.create!
+      expect(Post.where("id >": -9_223_372_036_854_775_809).exists?).to be true
+      expect(Post.where("id >=": -9_223_372_036_854_775_809).exists?).to be true
+      expect(Post.where("id <": 9_223_372_036_854_775_808).exists?).to be true
+      expect(Post.where("id <=": 9_223_372_036_854_775_808).exists?).to be true
+
+      expect(Post.where("id >": 9_223_372_036_854_775_808).exists?).to be false
+      expect(Post.where("id >=": 9_223_372_036_854_775_808).exists?).to be false
+      expect(Post.where("id <": -9_223_372_036_854_775_809).exists?).to be false
+      expect(Post.where("id <=": -9_223_372_036_854_775_809).exists?).to be false
+    end
+  end
   describe "datetime precision" do
     let(:date) { ::Time.utc(2014, 8, 17, 12, 30, 0, 999_999) }
     let!(:post) { Post.create!(created_at: date, updated_at: date) }
