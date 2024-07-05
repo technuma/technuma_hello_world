@@ -19,6 +19,7 @@ RSpec.describe TechnumaHelloWorld do
           t.integer :post_id
         end
       end
+
       class Post < ActiveRecord::Base
         has_many :comments
         alias_attribute :comments_count, :legacy_comments_count
