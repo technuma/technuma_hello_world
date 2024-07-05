@@ -42,6 +42,24 @@ RSpec.describe TechnumaHelloWorld do
       end
     end
 
+    describe "unscoping table name qualified column" do
+      let(:post1) { Post.create!(comments_count: 1) }
+      let!(:comment1) { post1.comments.create! }
+      let(:post2) { Post.create!(comments_count: 1) }
+      let!(:comment2) { post2.comments.create! }
+
+      it 'correctly unscopes table name qualified column' do
+        comments = Comment.joins(:post).where("posts.id <=": post1)
+        expect(comments).to eq([comment1])
+
+        comments = comments.where("id >=": 2)
+        expect(comments).to be_empty
+
+        comments = comments.unscope(where: :"posts.id")
+        expect(comments).to eq([comment2])
+      end
+    end
+
     # https://github.com/rails/rails/pull/39863/files#diff-fba6d35ef65b69650470b26fbf8e945446b6bb92c543e944015908a9fe200d62R101-R106
     describe "datetime precision" do
       let(:date) { ::Time.utc(2014, 8, 17, 12, 30, 0, 999_999) }
