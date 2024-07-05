@@ -11,6 +11,7 @@ RSpec.describe TechnumaHelloWorld do
       ActiveRecord::Base.logger = Logger.new(STDOUT)
       ActiveRecord::Schema.define do
         create_table :posts, force: true do |t|
+          t.integer :legacy_comments_count, default: 0
           t.datetime :created_at, precision: 0
           t.datetime :updated_at, precision: 4
         end
@@ -21,10 +22,24 @@ RSpec.describe TechnumaHelloWorld do
       end
       class Post < ActiveRecord::Base
         has_many :comments
+        alias_attribute :comments_count, :legacy_comments_count
       end
 
       class Comment < ActiveRecord::Base
         belongs_to :post
+      end
+    end
+
+    describe "alias_attribute :comments_count, :legacy_comments_count" do
+      let!(:post1) { Post.create!(comments_count: 4) }
+      let!(:post2) { Post.create!(comments_count: 5) }
+      let!(:post3) { Post.create!(comments_count: 6) }
+
+      it "allows querying using the aliased attribute name 'comments_count'" do
+        expect(Post.where("comments_count >=": 5).count).to eq(2)
+        expect(Post.where("comments_count >": 5).count).to eq(1)
+        expect(Post.where("comments_count <=": 5).count).to eq(2)
+        expect(Post.where("comments_count <": 5).count).to eq(1)
       end
     end
 
