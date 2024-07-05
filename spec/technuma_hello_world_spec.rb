@@ -61,6 +61,16 @@ RSpec.describe TechnumaHelloWorld do
       end
     end
 
+    describe "automatically added references (references detection)" do
+      let(:post) { Post.create!(comments_count: 1) }
+      let!(:comment) { post.comments.create! }
+
+      it "correctly adds references when using string or hash conditions" do
+        expect(Post.eager_load(:comments).where("comments.id >= ?", 0).references_values).to eq []
+        expect(Post.eager_load(:comments).where("comments.id >=": 0).references_values).to eq ["comments"]
+      end
+    end
+
     # https://github.com/rails/rails/pull/39863/files#diff-fba6d35ef65b69650470b26fbf8e945446b6bb92c543e944015908a9fe200d62R101-R106
     describe "datetime precision" do
       let(:date) { ::Time.utc(2014, 8, 17, 12, 30, 0, 999_999) }
