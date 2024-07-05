@@ -49,7 +49,7 @@ RSpec.describe TechnumaHelloWorld do
       let(:post2) { Post.create!(comments_count: 1) }
       let!(:comment2) { post2.comments.create! }
 
-      it 'correctly unscopes table name qualified column' do
+      it "correctly unscopes table name qualified column" do
         comments = Comment.joins(:post).where("posts.id <=": post1)
         expect(comments).to eq([comment1])
 
