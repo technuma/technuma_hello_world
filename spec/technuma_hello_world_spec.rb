@@ -7,7 +7,6 @@ RSpec.describe TechnumaHelloWorld do
 
   describe "simple Post Model" do
     before do
-      ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
       ActiveRecord::Base.logger = Logger.new(STDOUT)
       ActiveRecord::Schema.define do
         create_table :posts, force: true do |t|
