@@ -66,8 +66,8 @@ RSpec.describe TechnumaHelloWorld do
       let!(:comment) { post.comments.create! }
 
       it "correctly adds references when using string or hash conditions" do
-        expect(Post.eager_load(:comments).where("comments.id >= ?", 0).references_values).to eq []
-        expect(Post.eager_load(:comments).where("comments.id >=": 0).references_values).to eq ["comments"]
+        expect(Post.eager_load(:comments).where("comments.id >= ?", 0).references_values).to eq([])
+        expect(Post.eager_load(:comments).where("comments.id >=": 0).references_values).to eq(["comments"])
       end
     end
 
