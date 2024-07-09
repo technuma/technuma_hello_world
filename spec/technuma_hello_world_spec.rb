@@ -61,6 +61,15 @@ RSpec.describe TechnumaHelloWorld do
       end
     end
 
+    describe "#merge" do
+      let!(:post1) { Post.create! }
+      let!(:post2) { Post.create! }
+
+      it "merges with a post condition" do
+        expect(Post.where("id <=": 2).merge(Post.where(id: 2))).to eq([post2])
+      end
+    end
+
     describe "automatically added references (references detection)" do
       let(:post) { Post.create!(comments_count: 1) }
       let!(:comment) { post.comments.create! }
