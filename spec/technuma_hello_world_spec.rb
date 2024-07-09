@@ -30,6 +30,20 @@ RSpec.describe TechnumaHelloWorld do
       end
     end
 
+    describe "where with comparison operator key" do
+      let!(:post1) { Post.create! }
+      let!(:post2) { Post.create! }
+      let!(:post3) { Post.create! }
+      let(:posts) { Post.order(:id) }
+
+      it "correctly applies comparison operators in where clauses" do
+        expect(posts.where("id >": 1).pluck(:id)).to eq([2, 3])
+        expect(posts.where("id >=": 1).pluck(:id)).to eq([1, 2, 3])
+        expect(posts.where("id <": 2).pluck(:id)).to eq([1])
+        expect(posts.where("id <=": 2).pluck(:id)).to eq([1, 2])
+      end
+    end
+
     describe "alias_attribute :comments_count, :legacy_comments_count" do
       let!(:post1) { Post.create!(comments_count: 4) }
       let!(:post2) { Post.create!(comments_count: 5) }
