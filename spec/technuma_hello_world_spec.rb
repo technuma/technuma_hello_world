@@ -70,7 +70,7 @@ RSpec.describe TechnumaHelloWorld do
       end
     end
 
-    describe "automatically added references (references detection)" do
+    describe "references detection" do
       let(:post) { Post.create!(comments_count: 1) }
       let!(:comment) { post.comments.create! }
 
