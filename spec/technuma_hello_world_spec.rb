@@ -80,7 +80,8 @@ RSpec.describe TechnumaHelloWorld do
       let!(:post2) { Post.create! }
 
       it "merges with a post condition" do
-        expect(Post.where("id <=": 2).merge(Post.where(id: 2))).to eq([post2])
+        expect(Post.where("id <=": post2.id).merge(Post.where(id: post2.id))).to eq([post2])
+        expect(Post.where(id: post2.id).merge(Post.where("id <=": post2.id))).to eq([post1, post2])
       end
     end
 
