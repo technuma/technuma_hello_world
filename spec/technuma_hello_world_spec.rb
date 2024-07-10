@@ -6,32 +6,6 @@ RSpec.describe TechnumaHelloWorld do
   end
 
   describe "simple Post Model" do
-    before do
-      ActiveRecord::Base.logger = Logger.new(STDOUT)
-      ActiveRecord::Schema.define do
-        create_table :posts, force: true do |t|
-          t.integer :legacy_comments_count, default: 0
-          t.time :start, precision: 0
-          t.time :finish, precision: 4
-          t.datetime :created_at, precision: 0
-          t.datetime :updated_at, precision: 4
-        end
-
-        create_table :comments, force: true do |t|
-          t.integer :post_id
-        end
-      end
-
-      class Post < ActiveRecord::Base
-        has_many :comments
-        alias_attribute :comments_count, :legacy_comments_count
-      end
-
-      class Comment < ActiveRecord::Base
-        belongs_to :post
-      end
-    end
-
     describe "where with comparison operator key" do
       let!(:post1) { Post.create! }
       let!(:post2) { Post.create! }
