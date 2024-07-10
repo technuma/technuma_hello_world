@@ -99,14 +99,14 @@ RSpec.describe TechnumaHelloWorld do
 
     # https://github.com/rails/rails/pull/39863/files#diff-fba6d35ef65b69650470b26fbf8e945446b6bb92c543e944015908a9fe200d62R101-R106
     describe "datetime precision" do
-      let(:date) { ::Time.utc(2014, 8, 17, 12, 30, 0, 999_999) }
-      let!(:post) { Post.create!(created_at: date, updated_at: date) }
+      let(:time) { Time.utc(2014, 8, 17, 12, 30, 0, 999_999) }
+      let!(:post) { Post.create!(created_at: time, updated_at: time) }
 
       it "formats datetime according to precision" do
-        expect(Post.find_by("created_at >= ?", date)).to be_nil
-        expect(Post.where("updated_at >= ?", date).count).to eq(0)
-        expect(Post.find_by("created_at >=": date)).to be_truthy
-        expect(Post.where("updated_at >=": date).count).to eq(1)
+        expect(Post.find_by("created_at >= ?", time)).to be_nil
+        expect(Post.where("updated_at >= ?", time).count).to eq(0)
+        expect(Post.find_by("created_at >=": time)).to be_truthy
+        expect(Post.where("updated_at >=": time).count).to eq(1)
       end
     end
 
