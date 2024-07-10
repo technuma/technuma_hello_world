@@ -13,10 +13,10 @@ RSpec.describe TechnumaHelloWorld do
       let(:posts) { Post.order(:id) }
 
       it "correctly applies comparison operators in where clauses" do
-        expect(posts.where("id >": 1).pluck(:id)).to eq([2, 3])
-        expect(posts.where("id >=": 1).pluck(:id)).to eq([1, 2, 3])
-        expect(posts.where("id <": 2).pluck(:id)).to eq([1])
-        expect(posts.where("id <=": 2).pluck(:id)).to eq([1, 2])
+        expect(posts.where("id >": 1).pluck(:id)).to eq([post2.id, post3.id])
+        expect(posts.where("id >=": 1).pluck(:id)).to eq([post1.id, post2.id, post3.id])
+        expect(posts.where("id <": 2).pluck(:id)).to eq([post1.id])
+        expect(posts.where("id <=": 2).pluck(:id)).to eq([post1.id, post2.id])
       end
     end
 
