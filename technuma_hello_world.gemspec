@@ -35,6 +35,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "activerecord"
 
+  spec.add_development_dependency "database_cleaner"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rubocop"
