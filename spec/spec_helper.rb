@@ -2,6 +2,10 @@
 
 require "technuma_hello_world"
 
+require "database_cleaner"
+
+DatabaseCleaner.strategy = :transaction
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
@@ -14,5 +18,11 @@ RSpec.configure do |config|
   end
   config.before(:each) do
     ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
+  end
+  config.before :each do
+    DatabaseCleaner.start
+  end
+  config.after :each do
+    DatabaseCleaner.clean
   end
 end
