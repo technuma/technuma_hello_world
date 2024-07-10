@@ -11,6 +11,8 @@ RSpec.describe TechnumaHelloWorld do
       ActiveRecord::Schema.define do
         create_table :posts, force: true do |t|
           t.integer :legacy_comments_count, default: 0
+          t.time :start, precision: 0
+          t.time :finish, precision: 4
           t.datetime :created_at, precision: 0
           t.datetime :updated_at, precision: 4
         end
@@ -106,29 +108,19 @@ RSpec.describe TechnumaHelloWorld do
         expect(Post.where("updated_at >=": date).count).to eq(1)
       end
     end
+    describe "time precision" do
+      let(:time) { Time.utc(2000, 1, 1, 12, 30, 0, 999_999) }
+      let!(:post) { Post.create!(start: time, finish: time) }
+
+      it "handles time precision correctly" do
+        expect(Post.find_by("start >= ?", time)).to be_nil
+        expect(Post.where("finish >= ?", time).count).to eq(0)
+
+        expect(Post.find_by("start >=": time)).to be_truthy
+        expect(Post.where("finish >=": time).count).to eq(1)
+      end
+    end
   end
 
   # https://github.com/rails/rails/pull/39863/files#diff-12d007e9c2419aa48cfd2003590590870871d40704fe22cb85a2bf9d56e0b307R95-R100
-  describe "time precision" do
-    before do
-      ActiveRecord::Schema.define do
-        create_table :foos, force: true do |t|
-          t.time :start, precision: 0
-          t.time :finish, precision: 4
-        end
-      end
-      class Foo < ActiveRecord::Base; end
-    end
-
-    let(:time) { Time.utc(2000, 1, 1, 12, 30, 0, 999_999) }
-    let!(:foo) { Foo.create!(start: time, finish: time) }
-
-    it "handles time precision correctly" do
-      expect(Foo.find_by("start >= ?", time)).to be_nil
-      expect(Foo.where("finish >= ?", time).count).to eq(0)
-
-      expect(Foo.find_by("start >=": time)).to be_truthy
-      expect(Foo.where("finish >=": time).count).to eq(1)
-    end
-  end
 end
