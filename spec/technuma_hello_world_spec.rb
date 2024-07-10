@@ -43,7 +43,7 @@ RSpec.describe TechnumaHelloWorld do
         comments = Comment.joins(:post).where("posts.id <=": post1)
         expect(comments).to eq([comment1])
 
-        comments = comments.where("id >=": 2)
+        comments = comments.where("id >=": post2.id)
         expect(comments).to be_empty
 
         comments = comments.unscope(where: :"posts.id")
@@ -66,8 +66,8 @@ RSpec.describe TechnumaHelloWorld do
       let!(:comment) { post.comments.create! }
 
       it "correctly adds references when using string or hash conditions" do
-        expect(Post.eager_load(:comments).where("comments.id >= ?", 0).references_values).to eq([])
-        expect(Post.eager_load(:comments).where("comments.id >=": 0).references_values).to eq(["comments"])
+        expect(Post.eager_load(:comments).where("comments.id >= ?", comment.id).references_values).to eq([])
+        expect(Post.eager_load(:comments).where("comments.id >=": comment.id).references_values).to eq(["comments"])
       end
     end
 
