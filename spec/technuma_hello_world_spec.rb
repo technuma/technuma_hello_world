@@ -33,7 +33,7 @@ RSpec.describe TechnumaHelloWorld do
       end
     end
 
-    describe "unscoping table name qualified column" do
+    describe "#unscope" do
       let(:post1) { Post.create!(comments_count: 1) }
       let!(:comment1) { post1.comments.create! }
       let(:post2) { Post.create!(comments_count: 1) }
