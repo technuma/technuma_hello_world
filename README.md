@@ -29,6 +29,38 @@ posts.where("id <": 3).pluck(:id)  # => [1, 2]
 posts.where("id <=": 3).pluck(:id) # => [1, 2, 3]
 ```
 
+As a main contributor of the predicate builder area, @kamipo recommended to
+people use the hash syntax, the hash syntax also have other useful
+effects (making boundable queries, unscopeable queries, hash-like
+relation merging friendly, automatic other table references detection).
+
+```ruby
+
+#
+# #merge examles
+#
+
+# it doesn't work
+# SELECT "posts"."id" FROM "posts" WHERE (id > 1) AND "posts"."id" = ?  [["id", 1]]
+Post.where("id > ?", 1).merge(Post.where(id: 1)).pluck(:id) # []
+
+# it works
+# SELECT "posts"."id" FROM "posts" WHERE "posts"."id" = ?  [["id", 1]]
+Post.where("id >": 1).merge(Post.where(id: 1)).pluck(:id) # [1]
+
+#
+# #unscope examples
+#
+
+# it doesn't work
+# SELECT "posts".* FROM "posts" WHERE (id > 1)
+Post.where("id > ?", 1).unscope(where: :id)
+
+# it works
+# SELECT "posts".* FROM "posts"
+Post.where("id >": 1).unscope(where: :id)
+```
+
 From type casting and table/column name resolution's point of view,
 `where("created_at >=": time)` is better alternative than `where("created_at >= ?", time)`.
 
