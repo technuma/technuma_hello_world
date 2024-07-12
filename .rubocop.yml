@@ -10,6 +10,12 @@ Style/StringLiterals:
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 
+RSpec/IndexedLet:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 4
+
 Metrics/BlockLength:
   Exclude:
     - spec/*.rb
