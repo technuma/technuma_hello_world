@@ -59,7 +59,7 @@ Post.where("id > ?", 1).unscope(where: :id)
 Post.where("id >": 1).unscope(where: :id)
 ```
 
-### precision examples
+### Precision examples
 From type casting and table/column name resolution's point of view,
 `where("created_at >=": time)` is better alternative than `where("created_at >= ?", time)`.
 
