@@ -19,7 +19,7 @@ module TechnumaHelloWorld
         super
       end
 
-      OPERATORS = { ">" => :gt, ">=" => :gteq, "<" => :lt, "<=" => :lteq }.freeze
+      OPERATORS = { ">" => :gt, ">=" => :gteq, "<" => :lt, "<=" => :lteq }.freeze # rubocop:disable Lint/ConstantDefinitionInBlock
     end)
   end
 end

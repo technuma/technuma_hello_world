@@ -33,12 +33,12 @@ RSpec.configure do |config|
       end
     end
 
-    class Post < ActiveRecord::Base
+    class Post < ActiveRecord::Base # rubocop: disable Lint/ConstantDefinitionInBlock
       has_many :comments
       alias_attribute :comments_count, :legacy_comments_count
     end
 
-    class Comment < ActiveRecord::Base
+    class Comment < ActiveRecord::Base # rubocop: disable Lint/ConstantDefinitionInBlock
       belongs_to :post
     end
   end
