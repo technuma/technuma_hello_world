@@ -20,6 +20,7 @@ Or install it yourself as:
 
 
 ## Usage
+### basic examples
 ```ruby
 posts = Post.order(:id)
 
@@ -29,17 +30,13 @@ posts.where("id <": 3).pluck(:id)  # => [1, 2]
 posts.where("id <=": 3).pluck(:id) # => [1, 2, 3]
 ```
 
-As a main contributor of the predicate builder area, @kamipo recommended to
-people use the hash syntax, the hash syntax also have other useful
+As a main contributor of the predicate builder area, [@kamipo](https://github.com/kamipo) recommends
+using the hash syntax, the hash syntax also have other useful
 effects (making boundable queries, unscopeable queries, hash-like
 relation merging friendly, automatic other table references detection).
 
+### merge exapmles
 ```ruby
-
-#
-# #merge examles
-#
-
 # it doesn't work
 # SELECT "posts"."id" FROM "posts" WHERE (id > 1) AND "posts"."id" = ?  [["id", 1]]
 Post.where("id > ?", 1).merge(Post.where(id: 1)).pluck(:id) # []
@@ -47,11 +44,10 @@ Post.where("id > ?", 1).merge(Post.where(id: 1)).pluck(:id) # []
 # it works
 # SELECT "posts"."id" FROM "posts" WHERE "posts"."id" = ?  [["id", 1]]
 Post.where("id >": 1).merge(Post.where(id: 1)).pluck(:id) # [1]
+```
 
-#
-# #unscope examples
-#
-
+### unscope examples
+```ruby
 # it doesn't work
 # SELECT "posts".* FROM "posts" WHERE (id > 1)
 Post.where("id > ?", 1).unscope(where: :id)
