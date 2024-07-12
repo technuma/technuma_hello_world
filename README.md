@@ -30,12 +30,14 @@ posts.where("id <": 3).pluck(:id)  # => [1, 2]
 posts.where("id <=": 3).pluck(:id) # => [1, 2, 3]
 ```
 
+## Why not `Post.where("id > ?", 1)` ?
+
 As a main contributor of the predicate builder area, [@kamipo](https://github.com/kamipo) recommends
 using the hash syntax, the hash syntax also have other useful
 effects (making boundable queries, unscopeable queries, hash-like
 relation merging friendly, automatic other table references detection).
 
-### merge exapmles
+### Merge exapmles
 ```ruby
 # it doesn't work
 # SELECT "posts"."id" FROM "posts" WHERE (id > 1) AND "posts"."id" = ?  [["id", 1]]
@@ -46,7 +48,7 @@ Post.where("id > ?", 1).merge(Post.where(id: 1)).pluck(:id) # []
 Post.where("id >": 1).merge(Post.where(id: 1)).pluck(:id) # [1]
 ```
 
-### unscope examples
+### Unscope examples
 ```ruby
 # it doesn't work
 # SELECT "posts".* FROM "posts" WHERE (id > 1)
