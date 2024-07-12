@@ -20,7 +20,6 @@ Or install it yourself as:
 
 
 ## Usage
-### basic examples
 ```ruby
 posts = Post.order(:id)
 
@@ -37,7 +36,7 @@ using the hash syntax, the hash syntax also have other useful
 effects (making boundable queries, unscopeable queries, hash-like
 relation merging friendly, automatic other table references detection).
 
-### Merge exapmles
+### Merge examples
 ```ruby
 # it doesn't work
 # SELECT "posts"."id" FROM "posts" WHERE (id > 1) AND "posts"."id" = ?  [["id", 1]]
