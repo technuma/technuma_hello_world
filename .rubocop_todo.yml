@@ -15,33 +15,6 @@ Lint/ConstantDefinitionInBlock:
     - 'spec/spec_helper.rb'
 
 # Offense count: 1
-# Configuration parameters: CountAsOne.
-RSpec/ExampleLength:
-  Max: 6
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: .
-# SupportedStyles: implicit, each, example
-RSpec/HookArgument:
-  EnforcedStyle: each
-
-# Offense count: 12
-# Configuration parameters: Max, AllowedIdentifiers, AllowedPatterns.
-RSpec/IndexedLet:
-  Exclude:
-    - 'spec/technuma_hello_world_spec.rb'
-
-# Offense count: 5
-RSpec/LetSetup:
-  Exclude:
-    - 'spec/technuma_hello_world_spec.rb'
-
-# Offense count: 7
-RSpec/MultipleExpectations:
-  Max: 4
-
-# Offense count: 1
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Exclude:
