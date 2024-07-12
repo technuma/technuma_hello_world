@@ -2,7 +2,7 @@
 
 RSpec.describe TechnumaHelloWorld do
   it "has a version number" do
-    expect(TechnumaHelloWorld::VERSION).not_to be nil
+    expect(TechnumaHelloWorld::VERSION).not_to be_nil
   end
 
   describe "simple Post Model" do

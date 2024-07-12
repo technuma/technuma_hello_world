@@ -17,7 +17,7 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
   config.before(:suite) do
-    ActiveRecord::Base.logger = Logger.new(STDOUT)
+    ActiveRecord::Base.logger = Logger.new($stdout)
     ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
     ActiveRecord::Schema.define do
       create_table :posts, force: true do |t|
