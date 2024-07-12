@@ -34,7 +34,8 @@ posts.where("id <=": 3).pluck(:id) # => [1, 2, 3]
 As a main contributor of the predicate builder area, [@kamipo](https://github.com/kamipo) recommends
 using the hash syntax, the hash syntax also have other useful
 effects (making boundable queries, unscopeable queries, hash-like
-relation merging friendly, automatic other table references detection).
+relation merging friendly, automatic other table references detection).  
+ref: https://github.com/rails/rails/pull/39863#issue-659298581
 
 ### Merge examples
 ```ruby
@@ -77,8 +78,6 @@ Post.where("created_at >= ?", time) # => []
 # SELECT `posts`.* FROM `posts` WHERE `posts`.`created_at` >= '2020-06-24 10:11:12.123000'
 Post.where("created_at >=": time) # => [#<Post id: 1, created_at: "2020-06-24 10:11:12.123000">]
 ```
-
-ref: https://github.com/rails/rails/pull/39863#issue-659298581
 
 ## Development
 
