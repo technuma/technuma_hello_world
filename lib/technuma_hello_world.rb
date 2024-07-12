@@ -5,6 +5,7 @@ require "active_record"
 require "active_support/concern"
 require "logger"
 
+# :nodoc:
 module TechnumaHelloWorld
   class Error < StandardError; end
   ActiveSupport.on_load(:active_record) do
