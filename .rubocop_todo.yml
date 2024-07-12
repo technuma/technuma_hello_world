@@ -15,11 +15,6 @@ Lint/ConstantDefinitionInBlock:
     - 'spec/spec_helper.rb'
 
 # Offense count: 1
-# Configuration parameters: CountAsOne.
-RSpec/ExampleLength:
-  Max: 6
-
-# Offense count: 1
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Exclude:

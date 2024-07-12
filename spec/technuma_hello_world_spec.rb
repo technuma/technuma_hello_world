@@ -92,7 +92,10 @@ RSpec.describe TechnumaHelloWorld do
     # https://github.com/rails/rails/pull/39863/files#diff-12d007e9c2419aa48cfd2003590590870871d40704fe22cb85a2bf9d56e0b307R95-R100
     describe "time precision" do
       let(:time) { Time.utc(2000, 1, 1, 12, 30, 0, 999_999) }
-      let!(:post) { Post.create!(start: time, finish: time) }
+
+      before do
+        Post.create!(start: time, finish: time)
+      end
 
       it "handles time precision correctly" do
         expect(Post.find_by("start >= ?", time)).to be_nil
