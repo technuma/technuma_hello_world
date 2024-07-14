@@ -1,4 +1,4 @@
-# ActiveRecord::Pretty::Comparetor
+# ActiveRecord::Pretty::Comparator
 
 A simple ActiveRecord extension to support `where` with comparison operators (`>`, `>=`, `<`, and `<=`).
 
@@ -7,7 +7,7 @@ A simple ActiveRecord extension to support `where` with comparison operators (`>
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'activerecord-pretty-comparetor'
+gem 'activerecord-pretty-comparator'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install activerecord-pretty-comparetor
+    $ gem install activerecord-pretty-comparator
 
 
 ## Usage
@@ -87,7 +87,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/technuma/activerecord-pretty-comparetor.
+Bug reports and pull requests are welcome on GitHub at https://github.com/technuma/activerecord-pretty-comparator.
 
 ## License
 
