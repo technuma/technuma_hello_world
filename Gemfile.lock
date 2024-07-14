@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     technuma_hello_world (0.1.0)
-      activerecord (>= 6.1, < 8.0)
+      activerecord (>= 6.1)
 
 GEM
   remote: https://rubygems.org/
