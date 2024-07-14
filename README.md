@@ -40,22 +40,22 @@ ref: https://github.com/rails/rails/pull/39863#issue-659298581
 ### Merge examples
 ```ruby
 # it doesn't work
-# SELECT "posts"."id" FROM "posts" WHERE (id > 1) AND "posts"."id" = ?  [["id", 1]]
+# SELECT `posts`.`id` FROM `posts` WHERE (id > 1) AND `posts`.`id` = ?  [["id", 1]]
 Post.where("id > ?", 1).merge(Post.where(id: 1)).pluck(:id) # []
 
 # it works
-# SELECT "posts"."id" FROM "posts" WHERE "posts"."id" = ?  [["id", 1]]
+# SELECT `posts`.`id` FROM `posts` WHERE `posts`.`id` = ?  [["id", 1]]
 Post.where("id >": 1).merge(Post.where(id: 1)).pluck(:id) # [1]
 ```
 
 ### Unscope examples
 ```ruby
 # it doesn't work
-# SELECT "posts".* FROM "posts" WHERE (id > 1)
+# SELECT `posts`.* FROM `posts` WHERE (id > 1)
 Post.where("id > ?", 1).unscope(where: :id)
 
 # it works
-# SELECT "posts".* FROM "posts"
+# SELECT `posts`.* FROM `posts`
 Post.where("id >": 1).unscope(where: :id)
 ```
 
