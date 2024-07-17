@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email = ["technuma@gmail.com"]
 
   spec.summary = "HelloWorldするためのgem"
-  spec.description = "gemを試しに作ってみました"
+  spec.description = "gemを試しに作ってみました。"
   spec.homepage = "https://github.com/technuma/technuma_hello_world"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
