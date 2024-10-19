@@ -81,7 +81,7 @@ RSpec.describe TechnumaHelloWorld do
         Post.create!(created_at: time, updated_at: time)
       end
 
-      it "formats datetime according to precision" do
+      it "formats datetime according to precision3" do
         expect(Post.find_by("created_at >= ?", time)).to be_nil
         expect(Post.where("updated_at >= ?", time).count).to eq(0)
         expect(Post.find_by("created_at >=": time)).to be_truthy
